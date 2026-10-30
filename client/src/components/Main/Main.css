@@ -1,0 +1,13 @@
+.main__title {
+  margin-bottom: var(--space-4);
+}
+
+.main__subtitle {
+  margin-bottom: var(--space-10);
+  font-size: 20px;
+  line-height: 28px;
+}
+
+.main__section-title {
+  margin-bottom: var(--space-6);
+}

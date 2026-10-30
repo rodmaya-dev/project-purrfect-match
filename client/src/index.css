@@ -58,3 +58,16 @@ svg {
   h2 { font-size: 32px; line-height: 40px; }
   h3 { font-size: 26px; line-height: 30px; }
 }
+
+.page {
+  width: 100%;
+  max-width: var(--page-max-width);
+  margin: 0 auto;
+  padding: var(--space-10) var(--page-gutter);
+}
+
+@media (min-width: 768px) {
+  .page {
+    padding: var(--space-16) var(--page-gutter);
+  }
+}

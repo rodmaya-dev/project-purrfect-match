@@ -1,3 +1,6 @@
+// Forma LIMPIA de una raza, producida por utils/catApiCleaner.ts.
+// Es el único tipo de raza que usan los componentes.
+
 export interface NumericRange {
   min: number;
   max: number;

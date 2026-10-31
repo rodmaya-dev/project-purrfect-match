@@ -1,3 +1,7 @@
+// Forma CRUDA de lo que devuelve The Cat API. Solo se tipan los campos que
+// usamos o que son problemáticos; la API devuelve más. No usar en componentes:
+// para la interfaz está `Breed` (types/breed.ts), ya limpio.
+
 export interface CatApiImage {
   id: string;
   width: number;

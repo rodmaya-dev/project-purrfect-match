@@ -3,11 +3,16 @@ export interface NumericRange {
   max: number;
 }
 
+export type CoatType = 'short' | 'long' | 'hairless';
+
 export interface Breed {
   id: string;
   name: string;
   origin: string;
   description: string;
-  lifeSpan: NumericRange;
+  lifeSpan: NumericRange; // años
+  weightKg: NumericRange;
+  temperament: string[];
+  coat: CoatType[]; // vacío = sin clasificar
   imageUrl?: string;
 }

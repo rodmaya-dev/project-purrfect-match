@@ -6,16 +6,17 @@ Find the cat breed that fits your life. PurrfectMatch combines a short four-ques
 
 ## What it does
 
-- **Breed explorer:** browse breeds as cards with a photo, life span, description and origin.
-- **Quiz:** four questions (energy, character, size and coat) rank the breeds by how well they match your answers.
-- **Saved cats (full stack):** create an account, sign in and keep a private list of saved breeds with an optional note.
+- **Breed explorer:** browse 100 breeds as cards with a photo, life span, description and origin. Breeds load in groups of 12 with a "Load more" button, and the interface shows loading, error and empty states.
+- **Quiz (in progress):** four questions (energy, character, size and coat) will rank the breeds by how well they match your answers.
+- **Saved cats (full stack, planned):** create an account, sign in and keep a private list of saved breeds with an optional note.
 - **About the author:** a short page about me and about the project.
 
 ## Status
 
 - [x] Stage 0: planning and repository setup
 - [x] Stage 1.1: project structure and responsive layout (from 320 px)
-- [ ] Stage 1.2: The Cat API integration
+- [x] Stage 1.2: The Cat API integration (breed explorer)
+- [ ] Stage 1.2: quiz
 - [ ] Stage 2: custom API (TypeScript, MongoDB Atlas, JWT authentication) and saved cats
 
 ## Tech stack
@@ -31,27 +32,50 @@ Find the cat breed that fits your life. PurrfectMatch combines a short four-ques
 ```
 client/
   src/
-    components/   React components (App, Header, Main, About, Footer, BreedCard, BreedList)
-    config/       Constants
+    components/   React components (App, Header, Main, About, Footer,
+                  BreedCard, BreedList, StatusMessage)
+    config/       Constants: API settings, UI messages, data cleaning rules
+    hooks/        Custom hooks (useBreeds)
     images/       Images and icons
     styles/       Design tokens (CSS variables)
-    types/        Shared TypeScript types
-    utils/        Helper functions
+    types/        Shared TypeScript types (raw API data and clean breeds)
+    utils/        API requests and the data cleaning layer
     vendor/       Third-party resources (normalize.css, fonts)
 ```
 
 ## Getting started
 
-Requirements: Node.js 20.19+ or 22.12+.
+Requirements: Node.js 20.19+ or 22.12+ and a free API key from [The Cat API](https://thecatapi.com).
 
 ```bash
 git clone https://github.com/rodmaya-dev/project-purrfect-match.git
 cd project-purrfect-match/client
 npm install
+```
+
+### Environment variables
+
+Copy the example file and add your key:
+
+```bash
+cp .env.example .env
+```
+
+On Windows PowerShell use `Copy-Item .env.example .env`. Then edit `client/.env`:
+
+| Variable            | Description                |
+| ------------------- | -------------------------- |
+| `VITE_CAT_API_KEY`  | Your The Cat API key       |
+
+Vite exposes `VITE_` variables to the browser, so the key is visible in the built app. Use a free key, never one from an account you care about. The `.env` file is not versioned.
+
+### Run it
+
+```bash
 npm run dev
 ```
 
-Then open the URL shown in the terminal (usually `http://localhost:5173`).
+The app opens at `http://localhost:5173`.
 
 ### Scripts
 
@@ -60,6 +84,10 @@ Then open the URL shown in the terminal (usually `http://localhost:5173`).
 | `npm run dev`   | Start the development server            |
 | `npm run build` | Type-check and build for production     |
 | `npm run lint`  | Run ESLint                              |
+
+## Data
+
+The Cat API returns 107 breeds. The app does not use the raw response: a cleaning layer (`utils/catApiCleaner.ts`) removes 7 breeds with corrupted data, converts life span and weight to numeric ranges, groups coat types and filters out values that are not temperaments. The result is 100 usable breeds. The rules live in `config/breedCleaning.ts`.
 
 ## Deployment
 

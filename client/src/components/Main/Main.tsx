@@ -1,3 +1,5 @@
+import { useState } from 'react';
+import { BREEDS_PAGE_SIZE } from '../../config/catApi';
 import { MESSAGES } from '../../config/messages';
 import type { BreedsState } from '../../hooks/useBreeds';
 import BreedList from '../BreedList/BreedList';
@@ -9,8 +11,13 @@ interface MainProps {
 }
 
 function Main({ breedsState }: MainProps) {
-  // El switch sobre `status` hace que TypeScript te obligue a cubrir los
-  // tres casos, y `breeds` solo es accesible dentro de 'success'.
+  // Los hooks siempre van arriba, antes de cualquier condicional (regla del checklist).
+  const [visibleCount, setVisibleCount] = useState(BREEDS_PAGE_SIZE);
+
+  const handleLoadMore = () => {
+    setVisibleCount((current) => current + BREEDS_PAGE_SIZE);
+  };
+
   let content;
   switch (breedsState.status) {
     case 'loading':
@@ -19,14 +26,34 @@ function Main({ breedsState }: MainProps) {
     case 'error':
       content = <StatusMessage variant="error" message={MESSAGES.error} />;
       break;
-    case 'success':
-      content =
-        breedsState.breeds.length === 0 ? (
-          <StatusMessage variant="empty" message={MESSAGES.empty} />
-        ) : (
-          <BreedList breeds={breedsState.breeds} />
-        );
+    case 'success': {
+      const { breeds } = breedsState;
+      if (breeds.length === 0) {
+        content = <StatusMessage variant="empty" message={MESSAGES.empty} />;
+        break;
+      }
+      const hasMore = visibleCount < breeds.length;
+      content = (
+        <>
+          <BreedList breeds={breeds.slice(0, visibleCount)} />
+          <div className="main__load-more">
+            <p className="main__count" aria-live="polite">
+              {MESSAGES.shownCount(Math.min(visibleCount, breeds.length), breeds.length)}
+            </p>
+            {hasMore && (
+              <button
+                type="button"
+                className="main__load-more-button"
+                onClick={handleLoadMore}
+              >
+                {MESSAGES.loadMore}
+              </button>
+            )}
+          </div>
+        </>
+      );
       break;
+    }
   }
 
   return (

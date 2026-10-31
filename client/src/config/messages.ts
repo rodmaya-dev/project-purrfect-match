@@ -11,4 +11,7 @@ export const MESSAGES = {
   empty: 'No breeds found.',
   error:
     'Something went wrong with the request. It may be a connection or server problem. Please try again later.',
+  loadMore: 'Load more',
+  shownCount: (shown: number, total: number) =>
+    `Showing ${shown} of ${total} breeds`,
 } as const;

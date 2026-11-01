@@ -14,4 +14,11 @@ export const MESSAGES = {
   loadMore: 'Load more',
   shownCount: (shown: number, total: number) =>
     `Showing ${shown} of ${total} breeds`,
+  quizProgress: (current: number, total: number) =>
+    `Question ${current} of ${total}`,
+  quizNoPreference: 'No preference',
+  quizBack: 'Back',
+  quizNext: 'Next',
+  quizFinish: 'See my matches',
+  quizNeedAnswer: 'Answer at least one question to see your matches.',
 } as const;

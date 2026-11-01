@@ -21,4 +21,14 @@ export const MESSAGES = {
   quizNext: 'Next',
   quizFinish: 'See my matches',
   quizNeedAnswer: 'Answer at least one question to see your matches.',
+  quizSectionTitle: 'Find your match',
+  quizResultsTitle: 'Your top matches',
+  quizAffinity: (percent: number) => `${percent}% match`,
+  quizMatchesCount: (shown: number, total: number) =>
+    `Showing ${shown} of ${total} matches`,
+  quizShowMore: 'Show more matches',
+  quizRetake: 'Retake the quiz',
+  quizNoMatches: 'No breed matched your answers. Try different options.',
+  quizDisclaimer:
+    'This result is a guide, not a diagnosis. Talk to a vet or a breeder before you decide.',  
 } as const;

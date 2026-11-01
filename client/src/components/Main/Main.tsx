@@ -2,7 +2,10 @@ import { useState } from 'react';
 import { BREEDS_PAGE_SIZE } from '../../config/catApi';
 import { MESSAGES } from '../../config/messages';
 import type { BreedsState } from '../../hooks/useBreeds';
+import type { QuizAnswers } from '../../types/quiz';
 import BreedList from '../BreedList/BreedList';
+import Quiz from '../Quiz/Quiz';
+import QuizResults from '../QuizResults/QuizResults';
 import StatusMessage from '../StatusMessage/StatusMessage';
 import './Main.css';
 
@@ -11,12 +14,33 @@ interface MainProps {
 }
 
 function Main({ breedsState }: MainProps) {
-  // Los hooks siempre van arriba, antes de cualquier condicional (regla del checklist).
+  // Los hooks siempre van arriba, antes de cualquier condicional.
   const [visibleCount, setVisibleCount] = useState(BREEDS_PAGE_SIZE);
+  // null = el cuestionario aún no se termina.
+  const [quizAnswers, setQuizAnswers] = useState<QuizAnswers | null>(null);
 
   const handleLoadMore = () => {
     setVisibleCount((current) => current + BREEDS_PAGE_SIZE);
   };
+
+  // El cuestionario necesita las razas cargadas para poder puntuarlas.
+  const quizSection =
+    breedsState.status === 'success' && breedsState.breeds.length > 0 ? (
+      <section className="main__section" aria-labelledby="quiz-title">
+        <h2 id="quiz-title" className="main__section-title">
+          {MESSAGES.quizSectionTitle}
+        </h2>
+        {quizAnswers ? (
+          <QuizResults
+            breeds={breedsState.breeds}
+            answers={quizAnswers}
+            onRestart={() => setQuizAnswers(null)}
+          />
+        ) : (
+          <Quiz onComplete={setQuizAnswers} />
+        )}
+      </section>
+    ) : null;
 
   let content;
   switch (breedsState.status) {
@@ -38,7 +62,10 @@ function Main({ breedsState }: MainProps) {
           <BreedList breeds={breeds.slice(0, visibleCount)} />
           <div className="main__load-more">
             <p className="main__count" aria-live="polite">
-              {MESSAGES.shownCount(Math.min(visibleCount, breeds.length), breeds.length)}
+              {MESSAGES.shownCount(
+                Math.min(visibleCount, breeds.length),
+                breeds.length,
+              )}
             </p>
             {hasMore && (
               <button
@@ -62,7 +89,8 @@ function Main({ breedsState }: MainProps) {
       <p className="main__subtitle">
         Answer a short quiz or explore every breed on your own.
       </p>
-      <section aria-labelledby="breeds-title">
+      {quizSection}
+      <section className="main__section" aria-labelledby="breeds-title">
         <h2 id="breeds-title" className="main__section-title">
           Explore breeds
         </h2>

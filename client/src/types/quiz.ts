@@ -1,6 +1,6 @@
 // Tipos del cuestionario. Cada pregunta tiene su propio tipo de respuesta,
 // así el compilador detecta opciones mal escritas.
-import type { CoatType } from './breed';
+import type { Breed, CoatType } from './breed';
 
 export type EnergyAnswer = 'high' | 'low';
 export type CharacterAnswer = 'sociable' | 'independent';
@@ -31,3 +31,9 @@ export type QuizQuestion = {
     options: QuizOption<NonNullable<QuizAnswers[Id]>>[];
   };
 }[QuizQuestionId];
+
+// Una raza con su resultado del cuestionario.
+export interface BreedMatch {
+  breed: Breed;
+  affinity: number; // 0-100, redondeado
+}

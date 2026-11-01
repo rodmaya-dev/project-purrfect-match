@@ -29,7 +29,8 @@ export const CHARACTER_KEYWORDS: Readonly<
 export const SIZE_MEDIUM_MIN_KG = 5;
 export const SIZE_LARGE_MIN_KG = 6;
 
-// Cuántas razas muestra la pantalla de resultados.
+// Cuántas coincidencias muestra la pantalla de resultados por tramo
+// (el resto se ve con "Show more matches").
 export const RESULTS_COUNT = 5;
 
 export const QUIZ_QUESTIONS: readonly QuizQuestion[] = [

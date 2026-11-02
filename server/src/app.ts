@@ -1,4 +1,5 @@
-// Builds the Express application: middleware and routes. Kept separate from server.ts so it can be tested without opening a port.
+// Construye la aplicación Express: middleware y rutas.
+// Está separada de server.ts para poder probarla sin abrir un puerto.
 import express from 'express';
 import routes from './routes';
 

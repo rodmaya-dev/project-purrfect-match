@@ -1,4 +1,4 @@
-// Single entry point for all routes. app.ts mounts this router; each resource adds its own file here.
+// Punto único de entrada de las rutas. app.ts monta este router; cada recurso agrega su archivo aquí.
 import { Router } from 'express';
 import healthRouter from './health';
 

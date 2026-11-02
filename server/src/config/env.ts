@@ -1,13 +1,18 @@
-// Reads and validates environment variables once at startup.
-// Imported by server.ts and any module that needs configuration; fails fast if something is missing.
+// Lee y valida las variables de entorno una sola vez al arrancar.
+// Lo importan server.ts y los módulos de configuración; si falta algo, el proceso termina.
 import 'dotenv/config';
 import { z } from 'zod';
 
 const envSchema = z.object({
   PORT: z.coerce.number().int().positive().default(3001),
-  MONGODB_URI: z.string().min(1, 'MONGODB_URI is required'),
-  JWT_SECRET: z.string().min(32, 'JWT_SECRET must be at least 32 characters'),
-  CLIENT_ORIGIN: z.url('CLIENT_ORIGIN must be a valid URL'),
+  NODE_ENV: z.enum(['development', 'production', 'test']).default('development'),
+  MONGODB_URI: z
+    .string()
+    .min(1, 'MONGODB_URI es obligatoria')
+    .refine((uri) => uri.startsWith('mongodb'), 'MONGODB_URI debe empezar con "mongodb"')
+    .refine((uri) => !uri.includes('<'), 'MONGODB_URI aún tiene marcadores <...> sin reemplazar'),
+  JWT_SECRET: z.string().min(32, 'JWT_SECRET debe tener al menos 32 caracteres'),
+  CLIENT_ORIGIN: z.url('CLIENT_ORIGIN debe ser una URL válida'),
 });
 
 const result = envSchema.safeParse(process.env);
@@ -16,7 +21,7 @@ if (!result.success) {
   const details = result.error.issues
     .map((issue) => `- ${issue.path.join('.')}: ${issue.message}`)
     .join('\n');
-  console.error(`Invalid environment configuration:\n${details}`);
+  console.error(`Configuración de entorno inválida:\n${details}`);
   process.exit(1);
 }
 

@@ -1,5 +1,5 @@
-// Status route. Used by the hosting platform and by us to check the server is up.
-// It never touches the database or the token, so it always answers the same way.
+// Ruta de estado. La usan la plataforma de despliegue y nosotros para comprobar que el servidor vive.
+// No toca la base de datos ni el token, así que siempre responde igual.
 import { Router } from 'express';
 
 const router = Router();

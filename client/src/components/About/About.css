@@ -28,23 +28,3 @@
   padding: 0;
   list-style: none;
 }
-
-.about__link {
-  display: inline-block;
-  padding: 18px var(--space-8);
-  border: 2px solid var(--color-active);
-  border-radius: 100px;
-  background-color: #ffffff;
-  color: var(--color-active);
-  font-size: 18px;
-  line-height: 24px;
-  font-weight: 500;
-  transition:
-    background-color 0.2s,
-    color 0.2s;
-}
-
-.about__link:hover {
-  background-color: var(--color-active);
-  color: var(--color-on-active);
-}

@@ -31,7 +31,7 @@ export const SIZE_LARGE_MIN_KG = 6;
 
 // Cuántas coincidencias muestra la pantalla de resultados por tramo
 // (el resto se ve con "Show more matches").
-export const RESULTS_COUNT = 5;
+export const RESULTS_COUNT = 4;
 
 export const QUIZ_QUESTIONS: readonly QuizQuestion[] = [
   {

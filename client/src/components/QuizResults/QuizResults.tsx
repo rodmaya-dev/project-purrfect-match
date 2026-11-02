@@ -6,6 +6,7 @@ import type { QuizAnswers } from '../../types/quiz';
 import { rankBreeds } from '../../utils/quizScoring';
 import BreedList from '../BreedList/BreedList';
 import StatusMessage from '../StatusMessage/StatusMessage';
+import Button from '../Button/Button';
 import './QuizResults.css';
 
 interface QuizResultsProps {
@@ -53,21 +54,15 @@ function QuizResults({ breeds, answers, onRestart }: QuizResultsProps) {
 
       <div className="quiz-results__actions">
         {visibleCount < matches.length && (
-          <button
-            type="button"
-            className="quiz-results__button quiz-results__button_primary"
+          <Button
             onClick={() => setVisibleCount((current) => current + RESULTS_COUNT)}
           >
             {MESSAGES.quizShowMore}
-          </button>
+          </Button>
         )}
-        <button
-          type="button"
-          className="quiz-results__button quiz-results__button_secondary"
-          onClick={onRestart}
-        >
+        <Button variant="secondary" onClick={onRestart}>
           {MESSAGES.quizRetake}
-        </button>
+        </Button>
       </div>
     </div>
   );

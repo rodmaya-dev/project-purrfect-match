@@ -1,4 +1,5 @@
 import { AUTHOR_LINKS, AUTHOR_NAME } from '../../config/author';
+import '../Button/Button.css';
 import './About.css';
 
 function About() {
@@ -11,7 +12,19 @@ function About() {
           Hi, I'm {AUTHOR_NAME}
         </h2>
         <p className="about__text">
-          I’m an engineer with more than ten years of professional experience working with databases in enterprise environments. My core expertise is procedural SQL: Oracle PL/SQL and SQL Server T-SQL, including stored procedures, packages, and complex queries, with a focus on data modeling, data loading, and system integration. For global clients, I have supported production systems around the clock, from L2 incident analysis and root-cause investigation to SAP–Oracle integrations. I have worked remotely with distributed teams since 2019. I am now moving into full-stack web development with TypeScript, React, Node.js, and Express, building projects with MongoDB and deploying them on Vercel. I bring the same discipline from production support to the code I write: attention to data integrity, clear structure, and a focus on reliability.
+          I’m an engineer with more than ten years of professional experience
+          working with databases in enterprise environments. My core expertise
+          is procedural SQL: Oracle PL/SQL and SQL Server T-SQL, including
+          stored procedures, packages, and complex queries, with a focus on
+          data modeling, data loading, and system integration. For global
+          clients, I have supported production systems around the clock, from
+          L2 incident analysis and root-cause investigation to SAP–Oracle
+          integrations. I have worked remotely with distributed teams since
+          2019. I am now moving into full-stack web development with
+          TypeScript, React, Node.js, and Express, building projects with
+          MongoDB and deploying them on Vercel. I bring the same discipline
+          from production support to the code I write: attention to data
+          integrity, clear structure, and a focus on reliability.
         </p>
       </section>
 
@@ -39,7 +52,7 @@ function About() {
           {AUTHOR_LINKS.map((link) => (
             <li key={link.url}>
               <a
-                className="about__link"
+                className="button button_secondary"
                 href={link.url}
                 target="_blank"
                 rel="noreferrer"

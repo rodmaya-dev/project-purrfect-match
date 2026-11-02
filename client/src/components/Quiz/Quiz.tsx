@@ -4,6 +4,7 @@ import { MESSAGES } from '../../config/messages';
 import { QUIZ_QUESTIONS } from '../../config/quiz';
 import type { QuizAnswers } from '../../types/quiz';
 import { countAnswers } from '../../utils/quizScoring';
+import Button from '../Button/Button';
 import './Quiz.css';
 
 // Valor del radio "No preference": se guarda como pregunta sin responder.
@@ -77,21 +78,16 @@ function Quiz({ onComplete }: QuizProps) {
       </fieldset>
 
       <div className="quiz__actions">
-        <button
-          type="button"
-          className="quiz__button quiz__button_secondary"
+        <Button
+          variant="secondary"
           disabled={stepIndex === 0}
           onClick={() => setStepIndex((current) => current - 1)}
         >
           {MESSAGES.quizBack}
-        </button>
-        <button
-          type="submit"
-          className="quiz__button quiz__button_primary"
-          disabled={isLastStep && !canFinish}
-        >
+        </Button>
+        <Button type="submit" disabled={isLastStep && !canFinish}>
           {isLastStep ? MESSAGES.quizFinish : MESSAGES.quizNext}
-        </button>
+        </Button>
       </div>
 
       {isLastStep && !canFinish && (

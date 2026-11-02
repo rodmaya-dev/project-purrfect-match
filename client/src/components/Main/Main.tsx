@@ -7,6 +7,7 @@ import BreedList from '../BreedList/BreedList';
 import Quiz from '../Quiz/Quiz';
 import QuizResults from '../QuizResults/QuizResults';
 import StatusMessage from '../StatusMessage/StatusMessage';
+import Button from '../Button/Button';
 import './Main.css';
 
 interface MainProps {
@@ -68,13 +69,7 @@ function Main({ breedsState }: MainProps) {
               )}
             </p>
             {hasMore && (
-              <button
-                type="button"
-                className="main__load-more-button"
-                onClick={handleLoadMore}
-              >
-                {MESSAGES.loadMore}
-              </button>
+              <Button onClick={handleLoadMore}>{MESSAGES.loadMore}</Button>
             )}
           </div>
         </>

@@ -1,12 +1,11 @@
-// Textos de la interfaz para los estados de la petición.
-// Están aquí y no dentro de los componentes para poder cambiar el idioma
-// en un solo lugar por si se requiere.
-//
-//   loading: 'Cargando...'
-//   empty:   'No se encontró nada'
-//   error:   'Algo salió mal con la solicitud. Puede ser un problema de conexión
-//             o del servidor. Inténtalo de nuevo más tarde.'
+// Textos de la interfaz que dependen del estado de la aplicación: carga,
+// error, listas y cuestionario. Los usan components/Main, Quiz, QuizResults
+// y BreedList. Están aquí y no dentro de los componentes para poder cambiarlos
+// facilimemte si se requiere. Las entradas que son funciones reciben los
+// números que van dentro de la frase.
+
 export const MESSAGES = {
+  // Estados de la petición y lista de razas
   loading: 'Loading breeds...',
   empty: 'No breeds found.',
   error:
@@ -14,6 +13,8 @@ export const MESSAGES = {
   loadMore: 'Load more',
   shownCount: (shown: number, total: number) =>
     `Showing ${shown} of ${total} breeds`,
+
+  // Cuestionario
   quizProgress: (current: number, total: number) =>
     `Question ${current} of ${total}`,
   quizNoPreference: 'No preference',
@@ -21,6 +22,8 @@ export const MESSAGES = {
   quizNext: 'Next',
   quizFinish: 'See my matches',
   quizNeedAnswer: 'Answer at least one question to see your matches.',
+
+  // Resultados del cuestionario
   quizSectionTitle: 'Find your match',
   quizResultsTitle: 'Your top matches',
   quizAffinity: (percent: number) => `${percent}% match`,
@@ -30,5 +33,5 @@ export const MESSAGES = {
   quizRetake: 'Retake the quiz',
   quizNoMatches: 'No breed matched your answers. Try different options.',
   quizDisclaimer:
-    'This result is a guide, not a diagnosis. Talk to a vet or a breeder before you decide.',  
+    'This result is a guide, not a diagnosis. Talk to a vet or a breeder before you decide.',
 } as const;

@@ -1,3 +1,5 @@
+// En la página "About the author" (components/About) lo
+// dibuja como un botón por cada elemento de la lista.
 import type { ExternalLink } from '../types/link';
 
 export const AUTHOR_NAME = 'Rodrigo Maya';

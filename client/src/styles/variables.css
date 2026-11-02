@@ -1,0 +1,41 @@
+:root {
+  /* Colors (UI kit) */
+  --color-active: #2f71e5;
+  --color-active-hover: #0255e5;
+  --color-active-disabled: #8cacE5;
+  --color-on-active: #ffffff;
+  --color-error: #ff0000;
+  --color-success: #00d160;
+  --color-text: #000000;
+  --color-text-secondary: #8b8b8b;
+  --color-text-disabled: #cfcfcf;
+  --color-dark: #1a1b22;
+  /* Shapes and shadows (UI kit) */
+  --shadow-button: 0 5px 7.5px rgba(14, 26, 57, 0.2);
+  --radius-pill: 100px;
+
+  /* Typography */
+  --font-family-base: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
+
+  /* Spacing: multiples of 4px */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+
+  /* Layout */
+  --page-max-width: 1440px;
+  --page-gutter: var(--space-4);
+}
+
+@media (min-width: 768px) {
+  :root {
+    --page-gutter: var(--space-10);
+  }
+}

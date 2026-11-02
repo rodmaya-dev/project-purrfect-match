@@ -1,0 +1,34 @@
+.quiz-results {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.quiz-results__title {
+  margin: 0;
+  font-size: 24px;
+  line-height: 32px;
+}
+
+.quiz-results__title:focus {
+  outline: none;
+}
+
+.quiz-results__disclaimer {
+  margin: 0;
+  font-size: 14px;
+  color: var(--color-text-secondary);
+}
+
+.quiz-results__count {
+  margin: 0;
+  font-size: 14px;
+  text-align: center;
+}
+
+.quiz-results__actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-4);
+}

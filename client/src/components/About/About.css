@@ -1,0 +1,30 @@
+.about__title {
+  margin-bottom: var(--space-10);
+}
+
+.about__section {
+  max-width: 720px;
+  margin-bottom: var(--space-10);
+}
+
+.about__subtitle {
+  margin-bottom: var(--space-4);
+}
+
+.about__text {
+  font-size: 20px;
+  line-height: 28px;
+}
+
+.about__text + .about__text {
+  margin-top: var(--space-4);
+}
+
+.about__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}

@@ -1,0 +1,61 @@
+/* Botón del kit de UI. También se aplica a enlaces con
+   className="button button_secondary". El borde de 2px se descuenta del
+   padding para que ambas variantes midan lo mismo que el kit (18px / 32px). */
+.button {
+  display: inline-block;
+  padding: calc(18px - 2px) calc(var(--space-8) - 2px);
+  font: inherit;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 24px;
+  text-align: center;
+  text-decoration: none;
+  border: 2px solid var(--color-active);
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.button_primary {
+  color: var(--color-on-active);
+  background-color: var(--color-active);
+  box-shadow: var(--shadow-button);
+}
+
+.button_primary:hover:not(:disabled) {
+  background-color: var(--color-active-hover);
+  border-color: var(--color-active-hover);
+}
+
+.button_secondary {
+  color: var(--color-active);
+  background-color: transparent;
+}
+
+.button_secondary:hover:not(:disabled) {
+  color: var(--color-on-active);
+  background-color: var(--color-active);
+}
+
+.button:disabled {
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.button_primary:disabled {
+  background-color: var(--color-active-disabled);
+  border-color: var(--color-active-disabled);
+}
+
+.button_secondary:disabled {
+  color: var(--color-active-disabled);
+  border-color: var(--color-active-disabled);
+}
+
+.button:focus-visible {
+  outline: 3px solid var(--color-active);
+  outline-offset: 3px;
+}

@@ -1,5 +1,6 @@
 // Mensajes de error del servidor. Los usan los modelos, los esquemas de validación y el manejador de errores.
 import {
+  BREED_FIELD_MAX_LENGTH,
   NAME_MAX_LENGTH,
   NAME_MIN_LENGTH,
   NOTE_MAX_LENGTH,
@@ -19,8 +20,14 @@ export const MESSAGES = {
   NAME_TOO_LONG: `El nombre no puede superar los ${NAME_MAX_LENGTH} caracteres`,
   OWNER_REQUIRED: 'El dueño del registro es obligatorio',
   BREED_ID_REQUIRED: 'El id de la raza es obligatorio',
+  BREED_ID_TOO_LONG: `El id de la raza no puede superar los ${BREED_FIELD_MAX_LENGTH} caracteres`,
   BREED_NAME_REQUIRED: 'El nombre de la raza es obligatorio',
+  BREED_NAME_TOO_LONG: `El nombre de la raza no puede superar los ${BREED_FIELD_MAX_LENGTH} caracteres`,
+  IMAGE_URL_INVALID: 'La imagen debe ser una URL http o https válida',
   NOTE_TOO_LONG: `La nota no puede superar los ${NOTE_MAX_LENGTH} caracteres`,
+  CAT_ALREADY_SAVED: 'Ya guardaste esta raza',
+  SAVED_CAT_NOT_FOUND: 'El gato guardado no existe',
+  SAVED_CAT_FORBIDDEN: 'No puedes eliminar un gato guardado por otra persona',
   INVALID_CREDENTIALS: 'Correo electrónico o contraseña incorrectos',
   AUTH_REQUIRED: 'Se requiere autorización',
   INVALID_TOKEN: 'El token no es válido o ha caducado',

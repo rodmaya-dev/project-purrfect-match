@@ -16,6 +16,21 @@ function hasProperty<K extends string>(value: unknown, key: K): value is Record<
   return typeof value === 'object' && value !== null && key in value;
 }
 
+// El índice único que falló se identifica por sus campos (keyPattern) para dar un mensaje preciso.
+function getDuplicateMessage(error: unknown): string {
+  const keyPattern = hasProperty(error, 'keyPattern') ? error.keyPattern : undefined;
+
+  if (hasProperty(keyPattern, 'email')) {
+    return MESSAGES.EMAIL_TAKEN;
+  }
+
+  if (hasProperty(keyPattern, 'breedId')) {
+    return MESSAGES.CAT_ALREADY_SAVED;
+  }
+
+  return MESSAGES.DUPLICATE_RECORD;
+}
+
 function normalizeError(error: unknown): NormalizedError {
   if (error instanceof AppError) {
     return { statusCode: error.statusCode, message: error.message };
@@ -31,12 +46,7 @@ function normalizeError(error: unknown): NormalizedError {
   }
 
   if (hasProperty(error, 'code') && error.code === DUPLICATE_KEY_CODE) {
-    const isEmailDuplicate =
-      hasProperty(error, 'keyPattern') && hasProperty(error.keyPattern, 'email');
-    return {
-      statusCode: 409,
-      message: isEmailDuplicate ? MESSAGES.EMAIL_TAKEN : MESSAGES.DUPLICATE_RECORD,
-    };
+    return { statusCode: 409, message: getDuplicateMessage(error) };
   }
 
   if (hasProperty(error, 'type') && error.type === 'entity.parse.failed') {

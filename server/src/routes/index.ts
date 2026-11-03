@@ -4,6 +4,7 @@ import { Router } from 'express';
 import { requireAuth } from '../middlewares/auth';
 import authRouter from './auth';
 import healthRouter from './health';
+import savedCatsRouter from './savedCats';
 import usersRouter from './users';
 
 const router = Router();
@@ -11,5 +12,6 @@ const router = Router();
 router.use(healthRouter);
 router.use(authRouter);
 router.use('/users', requireAuth, usersRouter);
+router.use('/saved-cats', requireAuth, savedCatsRouter);
 
 export default router;

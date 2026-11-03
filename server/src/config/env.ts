@@ -12,7 +12,10 @@ const envSchema = z.object({
     .refine((uri) => uri.startsWith('mongodb'), 'MONGODB_URI debe empezar con "mongodb"')
     .refine((uri) => !uri.includes('<'), 'MONGODB_URI aún tiene marcadores <...> sin reemplazar'),
   JWT_SECRET: z.string().min(32, 'JWT_SECRET debe tener al menos 32 caracteres'),
-  CLIENT_ORIGIN: z.url('CLIENT_ORIGIN debe ser una URL válida'),
+  // CORS compara el origen exacto (sin barra final ni ruta), por eso se reduce a new URL(...).origin.
+  CLIENT_ORIGIN: z
+    .url('CLIENT_ORIGIN debe ser una URL válida')
+    .transform((value) => new URL(value).origin),
 });
 
 const result = envSchema.safeParse(process.env);

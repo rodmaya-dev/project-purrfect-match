@@ -1,4 +1,5 @@
-// Errores con código HTTP. Los controladores los lanzan con throw y el manejador central los convierte en respuesta.
+// Errores con código HTTP. Los controladores y middlewares los lanzan con throw
+// y el manejador central los convierte en respuesta.
 export class AppError extends Error {
   constructor(
     public readonly statusCode: number,
@@ -36,5 +37,11 @@ export class NotFoundError extends AppError {
 export class ConflictError extends AppError {
   constructor(message: string) {
     super(409, message);
+  }
+}
+
+export class TooManyRequestsError extends AppError {
+  constructor(message: string) {
+    super(429, message);
   }
 }

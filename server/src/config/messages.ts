@@ -32,6 +32,7 @@ export const MESSAGES = {
   AUTH_REQUIRED: 'Se requiere autorización',
   INVALID_TOKEN: 'El token no es válido o ha caducado',
   USER_NOT_FOUND: 'El usuario no existe',
+  TOO_MANY_REQUESTS: 'Demasiados intentos. Inténtalo de nuevo más tarde',
   VALIDATION_FAILED: 'Los datos enviados no son válidos',
   INVALID_JSON: 'El cuerpo de la solicitud no es un JSON válido',
   INVALID_ID: 'El identificador no tiene un formato válido',

@@ -1,8 +1,9 @@
 // Textos de la interfaz que dependen del estado de la aplicación: carga,
-// error, listas y cuestionario. Los usan components/Main, Quiz, QuizResults
-// y BreedList. Están aquí y no dentro de los componentes para poder cambiarlos
-// facilimemte si se requiere. Las entradas que son funciones reciben los
-// números que van dentro de la frase.
+// error, listas, cuestionario y errores de la conexión con mi API. Los usan
+// components/Main, Quiz, QuizResults y BreedList, y utils/api.ts. Están aquí
+// y no dentro de los componentes para poder cambiarlos fácilmente si se
+// requiere. Las entradas que son funciones reciben los números que van dentro
+// de la frase.
 
 export const MESSAGES = {
   // Estados de la petición y lista de razas
@@ -13,6 +14,10 @@ export const MESSAGES = {
   loadMore: 'Load more',
   shownCount: (shown: number, total: number) =>
     `Showing ${shown} of ${total} breeds`,
+
+  // Errores de mi API (cuando no hay una respuesta útil del servidor)
+  networkError: 'Could not reach the server. Please try again.',
+  unexpectedError: 'Something went wrong. Please try again.',
 
   // Cuestionario
   quizProgress: (current: number, total: number) =>

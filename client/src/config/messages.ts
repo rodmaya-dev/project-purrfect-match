@@ -1,9 +1,9 @@
 // Textos de la interfaz que dependen del estado de la aplicación: carga,
-// error, listas, cuestionario y errores de la conexión con la API propia. Los usan
-// components/Main, Quiz, QuizResults y BreedList, y utils/api.ts. Están aquí
-// y no dentro de los componentes para poder cambiarlos fácilmente si se
-// requiere. Las entradas que son funciones reciben los números que van dentro
-// de la frase.
+// error, listas, cuestionario, sesión y errores de la conexión con la API
+// propia. Los usan components/Main, Quiz, QuizResults, BreedList y Header, y
+// utils/api.ts. Están aquí y no dentro de los componentes para poder
+// cambiarlos fácilmente si se requiere. Las entradas que son funciones reciben
+// los números que van dentro de la frase.
 
 export const MESSAGES = {
   // Estados de la petición y lista de razas
@@ -18,6 +18,11 @@ export const MESSAGES = {
   // Errores de la API propia (cuando no hay una respuesta útil del servidor)
   networkError: 'Could not reach the server. Please try again.',
   unexpectedError: 'Something went wrong. Please try again.',
+
+  // Encabezado según haya sesión o no
+  headerSignIn: 'Sign in',
+  headerSignOut: 'Sign out',
+  headerSavedCats: 'My Cats',
 
   // Cuestionario
   quizProgress: (current: number, total: number) =>

@@ -1,12 +1,31 @@
-import { useState } from 'react';
-import { Link, NavLink } from 'react-router-dom';
+import { useContext, useState } from 'react';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
+import { MESSAGES } from '../../config/messages';
+import { CurrentUserContext } from '../../contexts/CurrentUserContext';
+import { removeToken } from '../../utils/token';
+import Button from '../Button/Button';
 import './Header.css';
 
 function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
+  const { currentUser, setCurrentUser, isCheckingSession } =
+    useContext(CurrentUserContext);
+  const navigate = useNavigate();
 
   const closeMenu = () => setIsMenuOpen(false);
   const toggleMenu = () => setIsMenuOpen((isOpen) => !isOpen);
+
+  const handleSignIn = () => {
+    closeMenu();
+    navigate('/signin');
+  };
+
+  const handleSignOut = () => {
+    removeToken();
+    setCurrentUser(null);
+    closeMenu();
+    navigate('/');
+  };
 
   return (
     <header className={`header ${isMenuOpen ? 'header_menu-open' : ''}`}>
@@ -40,6 +59,26 @@ function Header() {
         <NavLink to="/about" className="header__link" onClick={closeMenu}>
           About the author
         </NavLink>
+        {/* Mientras se valida el token guardado no se muestra ningún estado de sesión */}
+        {!isCheckingSession && currentUser && (
+          <>
+            <NavLink to="/saved" className="header__link" onClick={closeMenu}>
+              {MESSAGES.headerSavedCats}
+            </NavLink>
+            <button
+              type="button"
+              className="header__link header__link_button"
+              onClick={handleSignOut}
+            >
+              {MESSAGES.headerSignOut}
+            </button>
+          </>
+        )}
+        {!isCheckingSession && !currentUser && (
+          <div className="header__auth">
+            <Button onClick={handleSignIn}>{MESSAGES.headerSignIn}</Button>
+          </div>
+        )}
       </nav>
     </header>
   );

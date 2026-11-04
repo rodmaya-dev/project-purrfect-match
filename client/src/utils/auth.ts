@@ -1,6 +1,6 @@
-// Registro e inicio de sesión contra la API propia. Los llaman los formularios y el
-// contexto de sesión. Reutilizan request() de utils/api.ts; sin token, porque
-// todavía no hay sesión.
+// Registro e inicio de sesión contra la API propia. Los llaman Register y
+// Login. Reutilizan request() de utils/api.ts; sin token, porque todavía no
+// hay sesión.
 
 import type {
   CurrentUser,
@@ -8,7 +8,8 @@ import type {
   SignInResponse,
   SignUpPayload,
 } from '../types/auth';
-import { request } from './api';
+import { getCurrentUser, request } from './api';
+import { removeToken, setToken } from './token';
 
 export function signUp(payload: SignUpPayload): Promise<CurrentUser> {
   return request<CurrentUser>('/signup', {
@@ -24,4 +25,20 @@ export function signIn(payload: SignInPayload): Promise<SignInResponse> {
     body: payload,
     authorized: false,
   });
+}
+
+// Inicia sesión, guarda el token y devuelve la persona. Si no se puede cargar
+// el perfil, borra el token para no dejar una sesión a medias.
+export async function signInAndLoadUser(
+  payload: SignInPayload,
+): Promise<CurrentUser> {
+  const { token } = await signIn(payload);
+  setToken(token);
+
+  try {
+    return await getCurrentUser();
+  } catch (error) {
+    removeToken();
+    throw error;
+  }
 }

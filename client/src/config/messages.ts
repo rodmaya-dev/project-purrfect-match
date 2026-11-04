@@ -1,9 +1,10 @@
 // Textos de la interfaz que dependen del estado de la aplicación: carga,
 // error, listas, cuestionario, sesión y errores de la conexión con la API
-// propia. Los usan components/Main, Quiz, QuizResults, BreedList y Header, y
-// utils/api.ts. Están aquí y no dentro de los componentes para poder
-// cambiarlos fácilmente si se requiere. Las entradas que son funciones reciben
-// los números que van dentro de la frase.
+// propia. Los usan components/Main, Quiz, QuizResults, BreedList, Header,
+// AuthForm, Register y Login, y utils/api.ts y utils/errors.ts. Están aquí y
+// no dentro de los componentes para poder cambiarlos fácilmente si se
+// requiere. Las entradas que son funciones reciben los números que van dentro
+// de la frase.
 
 export const MESSAGES = {
   // Estados de la petición y lista de razas
@@ -23,6 +24,23 @@ export const MESSAGES = {
   headerSignIn: 'Sign in',
   headerSignOut: 'Sign out',
   headerSavedCats: 'My Cats',
+
+  // Formularios de registro e inicio de sesión
+  authSignUpTitle: 'Sign up',
+  authSignInTitle: 'Sign in',
+  authSignUpSubmit: 'Sign up',
+  authSigningUp: 'Signing up...',
+  authSignInSubmit: 'Sign in',
+  authSigningIn: 'Signing in...',
+  authNamePlaceholder: 'Name',
+  authEmailPlaceholder: 'Email',
+  authPasswordPlaceholder: 'Password',
+  authConfirmPasswordPlaceholder: 'Confirm password',
+  authOr: 'or',
+  authGoToSignIn: 'Sign in',
+  authGoToSignUp: 'Sign up',
+  authPasswordMismatch: 'Passwords do not match.',
+  authAccountCreatedNotice: 'Account created. Please sign in to continue.',
 
   // Cuestionario
   quizProgress: (current: number, total: number) =>

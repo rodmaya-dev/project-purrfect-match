@@ -5,7 +5,9 @@ import { useSession } from '../../hooks/useSession';
 import About from '../About/About';
 import Footer from '../Footer/Footer';
 import Header from '../Header/Header';
+import Login from '../Login/Login';
 import Main from '../Main/Main';
+import Register from '../Register/Register';
 
 function App() {
   // Vive aquí y no en Main para pedir las razas una sola vez: Main se
@@ -20,6 +22,8 @@ function App() {
         <Routes>
           <Route path="/" element={<Main breedsState={breedsState} />} />
           <Route path="/about" element={<About />} />
+          <Route path="/signup" element={<Register />} />
+          <Route path="/signin" element={<Login />} />
         </Routes>
         <Footer />
       </div>

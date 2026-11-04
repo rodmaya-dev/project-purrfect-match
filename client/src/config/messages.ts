@@ -1,5 +1,5 @@
 // Textos de la interfaz que dependen del estado de la aplicación: carga,
-// error, listas, cuestionario y errores de la conexión con mi API. Los usan
+// error, listas, cuestionario y errores de la conexión con la API propia. Los usan
 // components/Main, Quiz, QuizResults y BreedList, y utils/api.ts. Están aquí
 // y no dentro de los componentes para poder cambiarlos fácilmente si se
 // requiere. Las entradas que son funciones reciben los números que van dentro
@@ -15,7 +15,7 @@ export const MESSAGES = {
   shownCount: (shown: number, total: number) =>
     `Showing ${shown} of ${total} breeds`,
 
-  // Errores de mi API (cuando no hay una respuesta útil del servidor)
+  // Errores de la API propia (cuando no hay una respuesta útil del servidor)
   networkError: 'Could not reach the server. Please try again.',
   unexpectedError: 'Something went wrong. Please try again.',
 

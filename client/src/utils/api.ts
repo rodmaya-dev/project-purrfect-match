@@ -1,4 +1,4 @@
-// Capa de peticiones a mi API propia: la función central request() y las
+// Capa de peticiones a la API propia: la función central request() y las
 // llamadas que necesitan sesión (perfil y gatos guardados). El registro y el
 // inicio de sesión viven en utils/auth.ts. Las peticiones a The Cat API
 // siguen en utils/catApi.ts.

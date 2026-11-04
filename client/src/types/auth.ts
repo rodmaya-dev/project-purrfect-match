@@ -1,4 +1,4 @@
-// Tipos de usuario y autenticación de mi API. Los usan utils/api.ts y
+// Tipos de usuario y autenticación de la API propia. Los usan utils/api.ts y
 // utils/auth.ts, y después el contexto de sesión y los formularios.
 
 export interface CurrentUser {

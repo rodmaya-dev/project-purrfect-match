@@ -1,4 +1,4 @@
-// Registro e inicio de sesión contra mi API. Los llaman los formularios y el
+// Registro e inicio de sesión contra la API propia. Los llaman los formularios y el
 // contexto de sesión. Reutilizan request() de utils/api.ts; sin token, porque
 // todavía no hay sesión.
 

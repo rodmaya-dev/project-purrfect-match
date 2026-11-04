@@ -1,5 +1,6 @@
-// Configuración de mi API propia (cuentas, sesión y gatos guardados), no la de
-// The Cat API. La usan utils/api.ts y utils/token.ts.
+// Configuración de la API propia (cuentas, sesión y gatos guardados), no de la
+// API de terceros (The Cat API). La usan utils/api.ts, utils/token.ts y
+// hooks/useSession.ts.
 
 const rawApiUrl: string | undefined = import.meta.env.VITE_API_URL;
 
@@ -12,3 +13,7 @@ if (!rawApiUrl) {
 export const API_URL = rawApiUrl.replace(/\/+$/, '');
 
 export const TOKEN_STORAGE_KEY = 'token';
+
+// Respuestas de GET /users/me con las que el token guardado se da por inservible:
+// 401 (token inválido o caducado) y 404 (el usuario ya no existe)
+export const REJECTED_SESSION_STATUSES: readonly number[] = [401, 404];

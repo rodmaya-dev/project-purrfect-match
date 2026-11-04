@@ -1,0 +1,10 @@
+.saved-cat-card__note {
+  margin: 0;
+  color: var(--color-dark);
+  overflow-wrap: anywhere;
+}
+
+/* Empuja el botón al fondo para que queden alineados aunque las notas difieran */
+.saved-cat-card__actions {
+  margin-top: auto;
+}

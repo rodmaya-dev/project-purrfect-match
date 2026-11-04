@@ -7,7 +7,9 @@ import Footer from '../Footer/Footer';
 import Header from '../Header/Header';
 import Login from '../Login/Login';
 import Main from '../Main/Main';
+import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import Register from '../Register/Register';
+import SavedCats from '../SavedCats/SavedCats';
 
 function App() {
   // Vive aquí y no en Main para pedir las razas una sola vez: Main se
@@ -24,6 +26,14 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route path="/signup" element={<Register />} />
           <Route path="/signin" element={<Login />} />
+          <Route
+            path="/saved"
+            element={
+              <ProtectedRoute>
+                <SavedCats />
+              </ProtectedRoute>
+            }
+          />
         </Routes>
         <Footer />
       </div>

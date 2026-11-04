@@ -1,10 +1,10 @@
 // Textos de la interfaz que dependen del estado de la aplicación: carga,
-// error, listas, cuestionario, sesión y errores de la conexión con la API
-// propia. Los usan components/Main, Quiz, QuizResults, BreedList, Header,
-// AuthForm, Register y Login, y utils/api.ts y utils/errors.ts. Están aquí y
-// no dentro de los componentes para poder cambiarlos fácilmente si se
-// requiere. Las entradas que son funciones reciben los números que van dentro
-// de la frase.
+// error, listas, cuestionario, sesión, gatos guardados y errores de la
+// conexión con la API propia. Los usan components/Main, Quiz, QuizResults,
+// BreedList, Header, AuthForm, Register, Login, SavedCats y SavedCatCard, y
+// utils/api.ts y utils/errors.ts. Están aquí y no dentro de los componentes
+// para poder cambiarlos fácilmente si se requiere. Las entradas que son
+// funciones reciben los datos que van dentro de la frase.
 
 export const MESSAGES = {
   // Estados de la petición y lista de razas
@@ -41,6 +41,18 @@ export const MESSAGES = {
   authGoToSignUp: 'Sign up',
   authPasswordMismatch: 'Passwords do not match.',
   authAccountCreatedNotice: 'Account created. Please sign in to continue.',
+
+  // Página de gatos guardados
+  savedCatsTitle: 'My Cats',
+  savedCatsLoading: 'Loading your cats...',
+  savedCatsEmpty:
+    'You have not saved any cats yet. Save a breed from the list to see it here.',
+  savedCatsError:
+    'Could not load your saved cats. It may be a connection or server problem. Please try again later.',
+  savedCatsRemove: 'Remove',
+  savedCatsRemoving: 'Removing...',
+  savedCatsRemoveLabel: (breedName: string) =>
+    `Remove ${breedName} from My Cats`,
 
   // Cuestionario
   quizProgress: (current: number, total: number) =>

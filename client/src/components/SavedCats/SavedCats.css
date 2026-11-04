@@ -1,0 +1,7 @@
+.saved-cats__title {
+  margin-bottom: var(--space-8);
+}
+
+.saved-cats__alert {
+  margin-bottom: var(--space-6);
+}

@@ -49,3 +49,7 @@
   -webkit-box-orient: vertical;
   color: var(--color-dark);
 }
+
+.breed-card__actions {
+  margin-top: var(--space-2);
+}

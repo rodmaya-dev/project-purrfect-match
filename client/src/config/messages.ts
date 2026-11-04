@@ -1,10 +1,10 @@
 // Textos de la interfaz que dependen del estado de la aplicación: carga,
-// error, listas, cuestionario, sesión, gatos guardados y errores de la
+// error, listas, cuestionario, sesión, gatos guardados, avisos y errores de la
 // conexión con la API propia. Los usan components/Main, Quiz, QuizResults,
-// BreedList, Header, AuthForm, Register, Login, SavedCats y SavedCatCard, y
-// utils/api.ts y utils/errors.ts. Están aquí y no dentro de los componentes
-// para poder cambiarlos fácilmente si se requiere. Las entradas que son
-// funciones reciben los datos que van dentro de la frase.
+// BreedList, Header, AuthForm, Register, Login, SavedCats, SavedCatCard,
+// SaveCatButton y Notice, y utils/api.ts y utils/errors.ts. Están aquí y no
+// dentro de los componentes para poder cambiarlos fácilmente si se requiere.
+// Las entradas que son funciones reciben los datos que van dentro de la frase.
 
 export const MESSAGES = {
   // Estados de la petición y lista de razas
@@ -53,6 +53,20 @@ export const MESSAGES = {
   savedCatsRemoving: 'Removing...',
   savedCatsRemoveLabel: (breedName: string) =>
     `Remove ${breedName} from My Cats`,
+
+  // Botón de guardar de las tarjetas de raza
+  saveCat: 'Save',
+  savingCat: 'Saving...',
+  catSaved: 'Saved',
+  saveCatLabel: (breedName: string) => `Save ${breedName} to My Cats`,
+
+  // Avisos del resultado de cada acción
+  noticeCatSaved: (breedName: string) => `${breedName} was added to My Cats.`,
+  noticeCatAlreadySaved: (breedName: string) =>
+    `${breedName} is already in My Cats.`,
+  noticeCatRemoved: (breedName: string) =>
+    `${breedName} was removed from My Cats.`,
+  noticeClose: 'Close notification',
 
   // Cuestionario
   quizProgress: (current: number, total: number) =>

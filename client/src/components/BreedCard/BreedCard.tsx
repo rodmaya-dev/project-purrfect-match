@@ -2,6 +2,7 @@ import { useState } from 'react';
 import placeholderImage from '../../images/breed-placeholder.svg';
 import type { Breed } from '../../types/breed';
 import { formatLifeSpan } from '../../utils/formatters';
+import SaveCatButton from '../SaveCatButton/SaveCatButton';
 import './BreedCard.css';
 
 interface BreedCardProps {
@@ -33,6 +34,9 @@ function BreedCard({ breed }: BreedCardProps) {
         <h3 className="breed-card__title">{breed.name}</h3>
         <p className="breed-card__description">{breed.description}</p>
         <p className="breed-card__origin">{breed.origin}</p>
+        <div className="breed-card__actions">
+          <SaveCatButton breed={breed} />
+        </div>
       </div>
     </article>
   );

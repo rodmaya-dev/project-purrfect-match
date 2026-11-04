@@ -1,10 +1,12 @@
 // Página /saved: los gatos guardados de la persona con sesión. Muestra carga,
 // error y lista vacía, y permite eliminar. App la protege con ProtectedRoute.
 
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import type { ReactNode } from 'react';
 import { MESSAGES } from '../../config/messages';
+import { NoticeContext } from '../../contexts/NoticeContext';
 import { useSavedCats } from '../../hooks/useSavedCats';
+import type { SavedCat } from '../../types/savedCat';
 import { getErrorMessage } from '../../utils/errors';
 import SavedCatCard from '../SavedCatCard/SavedCatCard';
 import StatusMessage from '../StatusMessage/StatusMessage';
@@ -13,15 +15,17 @@ import './SavedCats.css';
 
 function SavedCats() {
   const { state, removeCat } = useSavedCats();
+  const { showNotice } = useContext(NoticeContext);
   const [removingId, setRemovingId] = useState<string | null>(null);
   const [removeError, setRemoveError] = useState<string>('');
 
-  const handleRemove = async (id: string) => {
+  const handleRemove = async (cat: SavedCat) => {
     setRemoveError('');
-    setRemovingId(id);
+    setRemovingId(cat._id);
 
     try {
-      await removeCat(id);
+      await removeCat(cat._id);
+      showNotice(MESSAGES.noticeCatRemoved(cat.breedName));
     } catch (error) {
       setRemoveError(getErrorMessage(error));
     } finally {

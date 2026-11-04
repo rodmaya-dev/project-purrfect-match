@@ -12,7 +12,7 @@ import './SavedCatCard.css';
 interface SavedCatCardProps {
   cat: SavedCat;
   isRemoving: boolean;
-  onRemove: (id: string) => void;
+  onRemove: (cat: SavedCat) => void;
 }
 
 function SavedCatCard({ cat, isRemoving, onRemove }: SavedCatCardProps) {
@@ -43,7 +43,7 @@ function SavedCatCard({ cat, isRemoving, onRemove }: SavedCatCardProps) {
             variant="secondary"
             disabled={isRemoving}
             aria-label={MESSAGES.savedCatsRemoveLabel(cat.breedName)}
-            onClick={() => onRemove(cat._id)}
+            onClick={() => onRemove(cat)}
           >
             {isRemoving ? MESSAGES.savedCatsRemoving : MESSAGES.savedCatsRemove}
           </Button>

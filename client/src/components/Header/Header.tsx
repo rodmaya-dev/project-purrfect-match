@@ -2,6 +2,7 @@ import { useContext, useState } from 'react';
 import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { MESSAGES } from '../../config/messages';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
+import { NoticeContext } from '../../contexts/NoticeContext';
 import { removeToken } from '../../utils/token';
 import Button from '../Button/Button';
 import './Header.css';
@@ -10,6 +11,7 @@ function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
   const { currentUser, setCurrentUser, isCheckingSession } =
     useContext(CurrentUserContext);
+  const { showNotice } = useContext(NoticeContext);
   const navigate = useNavigate();
 
   const closeMenu = () => setIsMenuOpen(false);
@@ -23,6 +25,7 @@ function Header() {
   const handleSignOut = () => {
     removeToken();
     setCurrentUser(null);
+    showNotice(MESSAGES.noticeSignedOut, 'info');
     closeMenu();
     navigate('/');
   };

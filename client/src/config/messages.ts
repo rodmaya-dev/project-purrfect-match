@@ -66,6 +66,9 @@ export const MESSAGES = {
     `${breedName} is already in My Cats.`,
   noticeCatRemoved: (breedName: string) =>
     `${breedName} was removed from My Cats.`,
+  noticeSignedUp: (name: string) => `Welcome, ${name}! Your account is ready.`,
+  noticeSignedIn: (name: string) => `Welcome back, ${name}!`,
+  noticeSignedOut: 'You have been signed out.',
   noticeClose: 'Close notification',
 
   // Cuestionario

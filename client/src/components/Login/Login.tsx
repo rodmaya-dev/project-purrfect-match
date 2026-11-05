@@ -7,6 +7,7 @@ import type { ChangeEvent, SubmitEvent } from 'react';
 import { Navigate, useLocation } from 'react-router-dom';
 import { MESSAGES } from '../../config/messages';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
+import { NoticeContext } from '../../contexts/NoticeContext';
 import { signInAndLoadUser } from '../../utils/auth';
 import { getErrorMessage } from '../../utils/errors';
 import AuthForm from '../AuthForm/AuthForm';
@@ -25,6 +26,7 @@ const INITIAL_VALUES: LoginValues = { email: '', password: '' };
 function Login() {
   const { currentUser, setCurrentUser, isCheckingSession } =
     useContext(CurrentUserContext);
+  const { showNotice } = useContext(NoticeContext);
   const location = useLocation();
   const notice = (location.state as LoginLocationState | null)?.notice;
   const [values, setValues] = useState<LoginValues>(INITIAL_VALUES);
@@ -46,6 +48,7 @@ function Login() {
         email: values.email.trim(),
         password: values.password,
       });
+      showNotice(MESSAGES.noticeSignedIn(user.name));
       // Al haber sesión, el Navigate de abajo lleva a "/"
       setCurrentUser(user);
     } catch (error) {

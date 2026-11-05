@@ -7,6 +7,7 @@ import type { ChangeEvent, SubmitEvent } from 'react';
 import { Navigate, useNavigate } from 'react-router-dom';
 import { MESSAGES } from '../../config/messages';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
+import { NoticeContext } from '../../contexts/NoticeContext';
 import { signInAndLoadUser, signUp } from '../../utils/auth';
 import { getErrorMessage } from '../../utils/errors';
 import AuthForm from '../AuthForm/AuthForm';
@@ -28,6 +29,7 @@ const INITIAL_VALUES: RegisterValues = {
 function Register() {
   const { currentUser, setCurrentUser, isCheckingSession } =
     useContext(CurrentUserContext);
+  const { showNotice } = useContext(NoticeContext);
   const navigate = useNavigate();
   const [values, setValues] = useState<RegisterValues>(INITIAL_VALUES);
   const [errorMessage, setErrorMessage] = useState<string>('');
@@ -61,6 +63,7 @@ function Register() {
 
     try {
       const user = await signInAndLoadUser({ email, password: values.password });
+      showNotice(MESSAGES.noticeSignedUp(user.name));
       // Al haber sesión, el Navigate de abajo lleva a "/"
       setCurrentUser(user);
     } catch {

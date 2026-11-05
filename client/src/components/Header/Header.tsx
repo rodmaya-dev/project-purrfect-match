@@ -35,6 +35,14 @@ function Header() {
     <header className={`header ${isMenuOpen ? 'header_menu-open' : ''}`}>
       <div className="header__bar">
         <Link to="/" className="header__logo" onClick={closeMenu}>
+          {/* Decorativo: el texto del enlace ya lo nombra */}
+          <img
+            className="header__logo-image"
+            src="/favicon.svg"
+            alt=""
+            width={32}
+            height={32}
+          />
           PurrfectMatch
         </Link>
         <button

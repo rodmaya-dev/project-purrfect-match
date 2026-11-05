@@ -12,9 +12,18 @@
 }
 
 .header__logo {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
   font-size: 20px;
   line-height: 30px;
   font-weight: 700;
+}
+
+.header__logo-image {
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
 }
 
 .header__menu-button {
@@ -92,7 +101,13 @@
   }
 
   .header__logo {
+    gap: var(--space-3);
     font-size: 26px;
+  }
+
+  .header__logo-image {
+    width: 40px;
+    height: 40px;
   }
 
   .header__menu-button {

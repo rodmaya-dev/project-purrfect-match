@@ -4,6 +4,7 @@ import { MESSAGES } from '../../config/messages';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import { NoticeContext } from '../../contexts/NoticeContext';
 import { removeToken } from '../../utils/token';
+import { getHeaderName } from '../../utils/userName';
 import Button from '../Button/Button';
 import './Header.css';
 
@@ -66,7 +67,7 @@ function Header() {
         {!isCheckingSession && currentUser && (
           <>
             <NavLink to="/saved" className="header__link" onClick={closeMenu}>
-              {MESSAGES.headerSavedCats}
+              {MESSAGES.headerSavedCats(getHeaderName(currentUser.name))}
             </NavLink>
             <button
               type="button"

@@ -23,7 +23,8 @@ export const MESSAGES = {
   // Encabezado según haya sesión o no
   headerSignIn: 'Sign in',
   headerSignOut: 'Sign out',
-  headerSavedCats: 'My Cats',
+  headerSavedCats: (firstName: string) =>
+    `${firstName}${/s$/i.test(firstName) ? "'" : "'s"} Cats`,
 
   // Formularios de registro e inicio de sesión
   authSignUpTitle: 'Sign up',

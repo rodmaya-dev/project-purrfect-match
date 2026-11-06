@@ -1,0 +1,43 @@
+// Mensajes de error que el servidor devuelve al cliente. Los usan los modelos, los esquemas de validación y el manejador de errores.
+// Están en inglés porque la interfaz va en inglés y muestra estos textos tal cual.
+import {
+  BREED_FIELD_MAX_LENGTH,
+  NAME_MAX_LENGTH,
+  NAME_MIN_LENGTH,
+  NOTE_MAX_LENGTH,
+  PASSWORD_MAX_LENGTH,
+  PASSWORD_MIN_LENGTH,
+} from './constants';
+
+export const MESSAGES = {
+  EMAIL_REQUIRED: 'Email is required',
+  EMAIL_INVALID: 'Email is not valid',
+  EMAIL_TAKEN: 'An account with this email already exists',
+  PASSWORD_REQUIRED: 'Password is required',
+  PASSWORD_TOO_SHORT: `Password must be at least ${PASSWORD_MIN_LENGTH} characters long`,
+  PASSWORD_TOO_LONG: `Password cannot be longer than ${PASSWORD_MAX_LENGTH} characters`,
+  NAME_REQUIRED: 'Name is required',
+  NAME_TOO_SHORT: `Name must be at least ${NAME_MIN_LENGTH} characters long`,
+  NAME_TOO_LONG: `Name cannot be longer than ${NAME_MAX_LENGTH} characters`,
+  OWNER_REQUIRED: 'The owner of the record is required',
+  BREED_ID_REQUIRED: 'Breed id is required',
+  BREED_ID_TOO_LONG: `Breed id cannot be longer than ${BREED_FIELD_MAX_LENGTH} characters`,
+  BREED_NAME_REQUIRED: 'Breed name is required',
+  BREED_NAME_TOO_LONG: `Breed name cannot be longer than ${BREED_FIELD_MAX_LENGTH} characters`,
+  IMAGE_URL_INVALID: 'Image must be a valid http or https URL',
+  NOTE_TOO_LONG: `Note cannot be longer than ${NOTE_MAX_LENGTH} characters`,
+  CAT_ALREADY_SAVED: 'You have already saved this breed',
+  SAVED_CAT_NOT_FOUND: 'Saved cat not found',
+  SAVED_CAT_FORBIDDEN: 'You cannot delete a cat saved by someone else',
+  INVALID_CREDENTIALS: 'Incorrect email or password',
+  AUTH_REQUIRED: 'Authorization required',
+  INVALID_TOKEN: 'The token is invalid or has expired',
+  USER_NOT_FOUND: 'User not found',
+  TOO_MANY_REQUESTS: 'Too many attempts. Please try again later',
+  VALIDATION_FAILED: 'The submitted data is not valid',
+  INVALID_JSON: 'The request body is not valid JSON',
+  INVALID_ID: 'The identifier has an invalid format',
+  DUPLICATE_RECORD: 'This record already exists',
+  ROUTE_NOT_FOUND: 'The requested route does not exist',
+  INTERNAL_ERROR: 'An error occurred on the server',
+} as const;

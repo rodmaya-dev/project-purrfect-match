@@ -8,7 +8,7 @@ Find the cat breed that fits your life. PurrfectMatch combines a short four-ques
 
 - **Quiz:** four questions (energy, character, size and coat) rank every breed by how well it matches your answers. Any question can be skipped with "No preference". Results show a match percentage on each breed card and load in small groups with a "Show more matches" button.
 - **Breed explorer:** browse 100 breeds as cards with a photo, life span, description and origin. Breeds load in groups of 12 with a "Load more" button, and the interface shows loading, error and empty states.
-- **Saved cats (full stack):** create an account, sign in and keep a private list of saved breeds with an optional note. The API is ready; the front end connects to it in Stage 2.2.
+- **Saved cats (full stack):** create an account, sign in and keep a private list of saved breeds. Each breed is saved from its card, with an optional note (up to 500 characters) that you write at that moment; notes cannot be edited afterwards yet. The list lives on a page that only signed-in people can open. The session is restored when the app opens, and every action shows a short notice.
 - **About the author:** a short page about me and about the project.
 
 ## Status
@@ -17,7 +17,7 @@ Find the cat breed that fits your life. PurrfectMatch combines a short four-ques
 - [x] Stage 1.1: project structure and responsive layout (from 320 px)
 - [x] Stage 1.2: The Cat API integration, breed explorer and quiz
 - [x] Stage 2.1: custom API (TypeScript, Express, MongoDB Atlas, JWT authentication)
-- [ ] Stage 2.2: connect the front end to the API, saved cats page and deployment
+- [x] Stage 2.2: front end connected to the API, saved cats page and deployment
 
 ## Tech stack
 
@@ -27,27 +27,35 @@ Find the cat breed that fits your life. PurrfectMatch combines a short four-ques
 
 **Back end:** Node.js, Express, TypeScript, MongoDB Atlas with Mongoose, JSON Web Tokens, bcryptjs, zod, cors, express-rate-limit
 
+**Deployment:** Vercel (front end and API), MongoDB Atlas (database)
+
 ## Project structure
 
 ```
 package.json      Root scripts to install and run both apps
 client/
+  vercel.json     Rewrite so direct links and reloads work on Vercel
   src/
     components/   React components (App, Header, Main, About, Footer, Button,
-                  BreedCard, BreedList, StatusMessage, Quiz, QuizResults)
-    config/       Constants: API settings, UI messages, quiz rules, data cleaning rules
-    hooks/        Custom hooks (useBreeds)
+                  BreedCard, BreedList, StatusMessage, Quiz, QuizResults,
+                  AuthForm, Login, Register, ProtectedRoute, SaveCatButton,
+                  SavedCatCard, SavedCats, Notice)
+    config/       Constants: API settings, UI messages, quiz rules, data cleaning rules,
+                  header and notice settings
+    contexts/     React contexts (current user and session, global notices)
+    hooks/        Custom hooks (useBreeds, useSession, useSavedCats, useNotice)
     images/       Images and icons
     styles/       Design tokens (CSS variables)
-    types/        Shared TypeScript types (raw API data, clean breeds, quiz)
-    utils/        API requests, the data cleaning layer and the quiz scoring
+    types/        Shared TypeScript types (raw API data, clean breeds, quiz, auth, saved cats)
+    utils/        Requests to The Cat API and to the custom API, the data cleaning layer,
+                  the quiz scoring, token and error helpers
     vendor/       Third-party resources (normalize.css, fonts)
 server/
   src/
     config/       Constants, environment validation, error messages, database connection
     controllers/  Route handlers (auth, users, saved cats)
     errors/       HTTP error classes
-    middlewares/  Authorization, rate limiter and centralized error handling
+    middlewares/  Authorization, database readiness, rate limiter and centralized error handling
     models/       Mongoose models (User, SavedCat)
     routes/       One router per resource, connected from routes/index.ts
     schemas/      zod schemas that validate request bodies
@@ -83,21 +91,22 @@ On Windows PowerShell use `Copy-Item client/.env.example client/.env` and `Copy-
 
 **`client/.env`**
 
-| Variable           | Description          |
-| ------------------ | -------------------- |
-| `VITE_CAT_API_KEY` | Your The Cat API key |
+| Variable           | Description                                                                                          |
+| ------------------ | ---------------------------------------------------------------------------------------------------- |
+| `VITE_CAT_API_KEY` | Your The Cat API key                                                                                 |
+| `VITE_API_URL`     | Address of the custom API, for example `http://localhost:3001`. The app stops at startup if it is missing |
 
-Vite exposes `VITE_` variables to the browser, so the key is visible in the built app. Use a free key, never one from an account you care about.
+Vite exposes `VITE_` variables to the browser, so the key is visible in the built app. Use a free key, never one from an account you care about. Vite also embeds these values when the app is built, so rebuild or redeploy the front end after changing them.
 
 **`server/.env`**
 
-| Variable        | Description                                                                 |
-| --------------- | --------------------------------------------------------------------------- |
-| `PORT`          | Port of the API (default `3001`)                                            |
-| `NODE_ENV`      | `development` or `production` (default `development`)                       |
-| `MONGODB_URI`   | MongoDB Atlas connection string, including the database name                |
-| `JWT_SECRET`    | Secret used to sign tokens, at least 32 characters                          |
-| `CLIENT_ORIGIN` | Origin of the front end allowed by CORS, for example `http://localhost:5173` |
+| Variable        | Description                                                                                                  |
+| --------------- | ------------------------------------------------------------------------------------------------------------ |
+| `PORT`          | Port of the API (default `3001`)                                                                             |
+| `NODE_ENV`      | `development`, `production` or `test`. If it is not set the API runs as `production`, so set `development` locally (the example file does) |
+| `MONGODB_URI`   | MongoDB Atlas connection string, including the database name                                                 |
+| `JWT_SECRET`    | Secret used to sign tokens, at least 32 characters                                                           |
+| `CLIENT_ORIGIN` | Origin of the front end allowed by CORS, for example `http://localhost:5173`                                 |
 
 You can generate a secret with:
 
@@ -105,7 +114,7 @@ You can generate a secret with:
 node -e "console.log(require('crypto').randomBytes(48).toString('hex'))"
 ```
 
-In development the API resolves the Atlas address with Google DNS (8.8.8.8 and 8.8.4.4), because some networks block the SRV lookup. The `.env` files are not versioned.
+With `NODE_ENV=development` the API resolves the Atlas address with Google DNS (8.8.8.8 and 8.8.4.4), because some networks block the SRV lookup. The `.env` files are not versioned.
 
 ### Run it
 
@@ -171,6 +180,7 @@ All errors have the same shape: `{ "message": "..." }`. Protected routes need th
 - Every query on saved cats is filtered by the owner taken from the token, and deleting someone else's record is rejected.
 - CORS only allows the origin set in `CLIENT_ORIGIN`.
 - Request bodies are validated before the database is touched.
+- In production the API trusts one proxy (the hosting platform), so the rate limiter tells one address from another. The limiter keeps its counters in memory, per server instance.
 
 ## Data
 
@@ -191,8 +201,10 @@ The API gives temperament as free text, so a breed without any of the keywords d
 
 ## Deployment
 
-- Front end: _coming soon_
-- API: _coming soon_
+- Front end: https://purrfect-meow.vercel.app
+- API: https://purrfect-match-api.vercel.app (status check at `/health`)
+
+Both apps run on Vercel as two projects, one for the `client` folder and one for the `server` folder, and the API connects to a MongoDB Atlas cluster. The API only accepts requests from the address of the front end (CORS). The front end project needs `VITE_CAT_API_KEY` and `VITE_API_URL`, and the API project needs `MONGODB_URI`, `JWT_SECRET` and `CLIENT_ORIGIN`. Redeploy the front end after changing its variables.
 
 ## Credits
 

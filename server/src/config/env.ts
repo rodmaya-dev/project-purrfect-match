@@ -5,7 +5,9 @@ import { z } from 'zod';
 
 const envSchema = z.object({
   PORT: z.coerce.number().int().positive().default(3001),
-  NODE_ENV: z.enum(['development', 'production', 'test']).default('development'),
+  // Por defecto 'production': en serverless no está confirmado que la plataforma defina NODE_ENV,
+  // y 'development' activaría el cambio de DNS y apagaría trust proxy. En local lo define .env.
+  NODE_ENV: z.enum(['development', 'production', 'test']).default('production'),
   MONGODB_URI: z
     .string()
     .min(1, 'MONGODB_URI es obligatoria')

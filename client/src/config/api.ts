@@ -1,6 +1,6 @@
 // Configuración de la API propia (cuentas, sesión y gatos guardados), no de la
-// API de terceros (The Cat API). La usan utils/api.ts, utils/token.ts y
-// hooks/useSession.ts.
+// API de terceros (The Cat API). La usan utils/api.ts, utils/token.ts,
+// hooks/useSession.ts y components/SaveCatButton.
 
 const rawApiUrl: string | undefined = import.meta.env.VITE_API_URL;
 
@@ -17,3 +17,6 @@ export const TOKEN_STORAGE_KEY = 'token';
 // Respuestas de GET /users/me con las que el token guardado se da por inservible:
 // 401 (token inválido o caducado) y 404 (el usuario ya no existe)
 export const REJECTED_SESSION_STATUSES: readonly number[] = [401, 404];
+
+// Mismo límite que NOTE_MAX_LENGTH del servidor; el servidor sigue siendo quien lo hace cumplir
+export const NOTE_MAX_LENGTH = 500;

@@ -61,6 +61,13 @@ export const MESSAGES = {
   catSaved: 'Saved',
   saveCatLabel: (breedName: string) => `Save ${breedName} to My Cats`,
 
+  // Nota opcional que se escribe al guardar una raza
+  noteLabel: 'Add a note (optional)',
+  notePlaceholder: 'Why do you like this breed?',
+  noteCounter: (length: number, max: number) => `${length}/${max}`,
+  noteCancel: 'Cancel',
+  noteCancelLabel: (breedName: string) => `Cancel saving ${breedName}`,
+
   // Avisos del resultado de cada acción
   noticeCatSaved: (breedName: string) => `${breedName} was added to My Cats.`,
   noticeCatAlreadySaved: (breedName: string) =>

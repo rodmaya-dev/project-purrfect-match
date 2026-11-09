@@ -1,0 +1,9 @@
+# Dependencias y compilados
+node_modules
+dist
+
+# Variables de entorno con secretos
+.env
+
+# Registros
+*.log

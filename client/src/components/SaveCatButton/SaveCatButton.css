@@ -1,0 +1,56 @@
+.save-cat__form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.save-cat__label {
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 700;
+  color: var(--color-dark);
+}
+
+.save-cat__field {
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+  padding: var(--space-3) var(--space-4);
+  font: inherit;
+  font-size: 16px;
+  color: var(--color-text);
+  background-color: #ffffff;
+  border: 1px solid var(--color-text-disabled);
+  border-radius: 16px;
+  /* Solo vertical: horizontal desbordaría la tarjeta a 320 px */
+  resize: vertical;
+  transition: border-color 0.2s ease;
+}
+
+.save-cat__field::placeholder {
+  color: var(--color-text-secondary);
+}
+
+.save-cat__field:hover,
+.save-cat__field:focus-visible {
+  border-color: var(--color-active);
+}
+
+.save-cat__field:focus-visible {
+  outline: 3px solid var(--color-active);
+  outline-offset: 2px;
+}
+
+.save-cat__counter {
+  margin: 0;
+  font-size: 14px;
+  line-height: 20px;
+  text-align: right;
+  color: var(--color-text-secondary);
+}
+
+.save-cat__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+}

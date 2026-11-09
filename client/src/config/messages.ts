@@ -1,8 +1,10 @@
 // Textos de la interfaz que dependen del estado de la aplicación: carga,
-// error, listas y cuestionario. Los usan components/Main, Quiz, QuizResults
-// y BreedList. Están aquí y no dentro de los componentes para poder cambiarlos
-// facilimemte si se requiere. Las entradas que son funciones reciben los
-// números que van dentro de la frase.
+// error, listas, cuestionario, sesión, gatos guardados, avisos y errores de la
+// conexión con la API propia. Los usan components/Main, Quiz, QuizResults,
+// BreedList, Header, AuthForm, Register, Login, SavedCats, SavedCatCard,
+// SaveCatButton y Notice, y utils/api.ts y utils/errors.ts. Están aquí y no
+// dentro de los componentes para poder cambiarlos fácilmente si se requiere.
+// Las entradas que son funciones reciben los datos que van dentro de la frase.
 
 export const MESSAGES = {
   // Estados de la petición y lista de razas
@@ -13,6 +15,69 @@ export const MESSAGES = {
   loadMore: 'Load more',
   shownCount: (shown: number, total: number) =>
     `Showing ${shown} of ${total} breeds`,
+
+  // Errores de la API propia (cuando no hay una respuesta útil del servidor)
+  networkError: 'Could not reach the server. Please try again.',
+  unexpectedError: 'Something went wrong. Please try again.',
+
+  // Encabezado según haya sesión o no
+  headerSignIn: 'Sign in',
+  headerSignOut: 'Sign out',
+  headerSavedCats: (firstName: string) =>
+    `${firstName}${/s$/i.test(firstName) ? "'" : "'s"} Cats`,
+
+  // Formularios de registro e inicio de sesión
+  authSignUpTitle: 'Sign up',
+  authSignInTitle: 'Sign in',
+  authSignUpSubmit: 'Sign up',
+  authSigningUp: 'Signing up...',
+  authSignInSubmit: 'Sign in',
+  authSigningIn: 'Signing in...',
+  authNamePlaceholder: 'Name',
+  authEmailPlaceholder: 'Email',
+  authPasswordPlaceholder: 'Password',
+  authConfirmPasswordPlaceholder: 'Confirm password',
+  authOr: 'or',
+  authGoToSignIn: 'Sign in',
+  authGoToSignUp: 'Sign up',
+  authPasswordMismatch: 'Passwords do not match.',
+  authAccountCreatedNotice: 'Account created. Please sign in to continue.',
+
+  // Página de gatos guardados
+  savedCatsTitle: 'My Cats',
+  savedCatsLoading: 'Loading your cats...',
+  savedCatsEmpty:
+    'You have not saved any cats yet. Save a breed from the list to see it here.',
+  savedCatsError:
+    'Could not load your saved cats. It may be a connection or server problem. Please try again later.',
+  savedCatsRemove: 'Remove',
+  savedCatsRemoving: 'Removing...',
+  savedCatsRemoveLabel: (breedName: string) =>
+    `Remove ${breedName} from My Cats`,
+
+  // Botón de guardar de las tarjetas de raza
+  saveCat: 'Save',
+  savingCat: 'Saving...',
+  catSaved: 'Saved',
+  saveCatLabel: (breedName: string) => `Save ${breedName} to My Cats`,
+
+  // Nota opcional que se escribe al guardar una raza
+  noteLabel: 'Add a note (optional)',
+  notePlaceholder: 'Why do you like this breed?',
+  noteCounter: (length: number, max: number) => `${length}/${max}`,
+  noteCancel: 'Cancel',
+  noteCancelLabel: (breedName: string) => `Cancel saving ${breedName}`,
+
+  // Avisos del resultado de cada acción
+  noticeCatSaved: (breedName: string) => `${breedName} was added to My Cats.`,
+  noticeCatAlreadySaved: (breedName: string) =>
+    `${breedName} is already in My Cats.`,
+  noticeCatRemoved: (breedName: string) =>
+    `${breedName} was removed from My Cats.`,
+  noticeSignedUp: (name: string) => `Welcome, ${name}! Your account is ready.`,
+  noticeSignedIn: (name: string) => `Welcome back, ${name}!`,
+  noticeSignedOut: 'You have been signed out.',
+  noticeClose: 'Close notification',
 
   // Cuestionario
   quizProgress: (current: number, total: number) =>

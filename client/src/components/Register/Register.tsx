@@ -5,6 +5,12 @@
 import { useContext, useState } from 'react';
 import type { ChangeEvent, SubmitEvent } from 'react';
 import { Navigate, useNavigate } from 'react-router-dom';
+import {
+  NAME_MAX_LENGTH,
+  NAME_MIN_LENGTH,
+  PASSWORD_MAX_LENGTH,
+  PASSWORD_MIN_LENGTH,
+} from '../../config/api';
 import { MESSAGES } from '../../config/messages';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import { NoticeContext } from '../../contexts/NoticeContext';
@@ -103,8 +109,8 @@ function Register() {
         placeholder={MESSAGES.authNamePlaceholder}
         aria-label={MESSAGES.authNamePlaceholder}
         autoComplete="name"
-        minLength={2}
-        maxLength={30}
+        minLength={NAME_MIN_LENGTH}
+        maxLength={NAME_MAX_LENGTH}
         required
       />
       <input
@@ -127,8 +133,8 @@ function Register() {
         placeholder={MESSAGES.authPasswordPlaceholder}
         aria-label={MESSAGES.authPasswordPlaceholder}
         autoComplete="new-password"
-        minLength={8}
-        maxLength={72}
+        minLength={PASSWORD_MIN_LENGTH}
+        maxLength={PASSWORD_MAX_LENGTH}
         required
       />
       <input
@@ -140,8 +146,8 @@ function Register() {
         placeholder={MESSAGES.authConfirmPasswordPlaceholder}
         aria-label={MESSAGES.authConfirmPasswordPlaceholder}
         autoComplete="new-password"
-        minLength={8}
-        maxLength={72}
+        minLength={PASSWORD_MIN_LENGTH}
+        maxLength={PASSWORD_MAX_LENGTH}
         required
       />
     </AuthForm>

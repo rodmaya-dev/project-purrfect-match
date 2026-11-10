@@ -1,4 +1,4 @@
-// Modelo de usuario. Lo usarán el registro, el inicio de sesión y la ruta de perfil.
+// Modelo de usuario. Lo usan el registro, el inicio de sesión y la ruta de perfil.
 // La contraseña guarda solo el hash y no se incluye en las consultas salvo que se pida con select('+password').
 import { Schema, model } from 'mongoose';
 import validator from 'validator';

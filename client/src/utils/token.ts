@@ -1,5 +1,6 @@
-// Acceso al token guardado en localStorage. Lo usa utils/api.ts en cada
-// petición, y más adelante el contexto de sesión al iniciar o cerrar sesión.
+// Acceso al token guardado en localStorage. Lo usan utils/api.ts en cada
+// petición, utils/auth.ts al iniciar sesión, hooks/useSession.ts al recuperarla
+// y el Header al cerrarla.
 
 import { TOKEN_STORAGE_KEY } from '../config/api';
 

@@ -38,7 +38,7 @@
     "typescript": "~6.0.0",
     "typescript-eslint": "^8.72.1"
   },
-  "private": "true",
+  "private": true,
   "engines": {
     "node": ">=20"
   }

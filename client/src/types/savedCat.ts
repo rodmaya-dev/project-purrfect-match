@@ -1,5 +1,6 @@
-// Tipos de los gatos guardados de la API propia. Los usan utils/api.ts y, después,
-// la página de gatos guardados y el botón de guardar de las tarjetas.
+// Tipos de los gatos guardados de la API propia. Los usan utils/api.ts, la página
+// de gatos guardados (SavedCats, SavedCatCard y useSavedCats) y el botón de
+// guardar de las tarjetas (SaveCatButton).
 
 export interface SavedCat {
   _id: string;

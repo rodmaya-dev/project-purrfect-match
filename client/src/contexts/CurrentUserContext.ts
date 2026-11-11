@@ -1,6 +1,6 @@
 // Contexto global con la persona que tiene la sesión abierta. App lo inserta
-// con CurrentUserContext.Provider; lo leerán el encabezado, los formularios y
-// la ruta protegida.
+// con CurrentUserContext.Provider; lo leen el encabezado, los formularios de
+// registro e inicio de sesión, el botón de guardar y la ruta protegida.
 
 import { createContext } from 'react';
 import type { CurrentUser } from '../types/auth';
